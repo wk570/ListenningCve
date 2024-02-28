@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CVE通知</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/git.css') }}">
+</head>
+<body>
+<button id="update-list" onclick="updateList()">更新列表</button>
+<div id="new-data-message" style="display: none; color: red; font-weight: bold;">新数据已添加</div>
+<div id="no-new-data-message" style="display: none; color: blue;">暂无最新数据</div>
+<ul id="cve-list">
+    {% for cve in existing_list %}
+    <li>
+        <div class="cve-main">
+            <p class="cve-id">{{ cve.cve_name }}</p>
+            <p class="cve_url">{{ cve.cve_url }}</p>
+            <p class="created_at">{{ cve.created_at }}</p>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+<script src="{{ url_for('static', filename='js/git.js') }}"></script>
+<script>
+    function updateList() {
+        fetch('/git/update').then(response => response.json()).then(data => {
+            const newDataMessage = document.getElementById('new-data-message');
+            const noNewDataMessage = document.getElementById('no-new-data-message');
+
+            if (data.length === 0) {
+                noNewDataMessage.style.display = 'block'; // 显示无最新数据提示
+            } else {
+                newDataMessage.style.display = 'block'; // 显示新数据已添加提示
+
+                data.forEach(cve => {
+                    const newItem = document.createElement('li');
+                    newItem.innerHTML = `
+                        <div class="cve-main">
+                            <p class="cve-id">${cve.cve_name}</p>
+                            <p class="cve_url">${cve.cve_url}</p>
+                            <p class="created_at">${cve.created_at}</p>
+                        </div>`;
+                    document.getElementById('cve-list').prepend(newItem); // 将新数据添加到顶部
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

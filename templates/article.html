@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
+
+ <style>
+      .loader {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 2s linear infinite;
+        margin: 0 auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+</head>
+<body>
+  <button class="myButton" id="myButton">更新</button>
+        <div class="loader" id="loader" style="display: none;"></div>
+        <div id="clickTime"></div>
+    <div class="list">
+
+        {% for data in datas %}
+                <div class="main_title">
+                    <h2 class="rss_tile">{{data.get('rss_title')}} </h2>
+                    <p class="question-title"><a href="{{url_for('article.rss_detail', rss_id=data.rss_id)}}" target="_blank">查看更多</a></p>
+                    <div class="index_link">
+                        {% for entry in data.get('entries')%}
+                        <p class="entry">
+                          <a href="{{entry.get('link')}}"target="_blank">{{ entry.get('title') }}</a>
+                        </p>
+                        <p class="link_date">
+                            <span class="question-time">{{ entry.get('date') }}</span>
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+
+<script src="{{url_for('static', filename='js/refresh.js')}}"></script>
+</body>
+
+
+</html>

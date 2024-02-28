@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 引入 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- 引入 DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <!-- 引入 DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+    <title>Title</title>
+
+</head>
+<body>
+        <div class="form-container">
+            <div class="form-group">
+                <label for="select_time">时间范围：</label>
+                <select id="select_time">
+                    <option value="7">最近七天</option>
+                    <option value="custom">自定义</option>
+                    <option value="1">最近一天</option>
+                    <option value="3">最近三天</option>
+                    <option value="30">一个月</option>
+                </select>
+            </div>
+            <div class="form-group custom-time" style="display: none;">
+                <label for="start_date">开始时间：</label>
+                <input type="datetime-local" id="start_date">
+            </div>
+            <div class="form-group custom-time" style="display: none;">
+                <label for="end_date">结束时间：</label>
+                <input type="datetime-local" id="end_date">
+            </div>
+            <div class="form-cve">
+                <label >CVE-ID </label>
+                <input type="text" id="cve_id">
+            </div>
+            <div class="form-group">
+                <button id="submitBtn" class="btn btn-primary btn-block">提交</button>
+            </div>
+        </div>
+        <table id="table" class="display">
+            <thead>
+            <tr>
+                <th>名称</th>
+                <th>描述</th>
+                <th>严重程度</th>
+                <th>所需权限</th>
+                <th>发布日期</th>
+                <th>最近修改</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+
+        <script src="{{url_for('static', filename='js/cve.js')}}"></script> <!-- 这里根据实际情况保持引入位置 -->
+
+</body>
+</html>

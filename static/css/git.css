@@ -1,0 +1,30 @@
+.cve-main {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.cve-id {
+    font-weight: bold;
+}
+
+.cve_url {
+    color: #007bff;
+}
+
+.created_at {
+    color: #6c757d;
+}
+
+#update-list {
+    margin-bottom: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#update-list:hover {
+    background-color: #0056b3;
+}

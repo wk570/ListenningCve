@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        .index_link {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .entry {
+            margin: 0;
+        }
+
+        .entry a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .entry a:hover {
+            text-decoration: underline;
+        }
+
+        .link_date {
+            margin-top: 5px;
+            color: #999;
+        }
+
+        .question-time {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<h2>
+    {{title}}
+</h2>
+ {% for data in datas %}
+                <div class="index_link">
+                    <p class="entry">
+                      <a href="{{data.get('link')}}">{{ data.get('title') }}</a>
+                    </p>
+                    <p class="link_date">
+                        <span class="question-time">{{data.get('date') }}</span>
+                    </p>
+
+                </div>
+            </li>
+        {% endfor %}
+</body>
+</html>
