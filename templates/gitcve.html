@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CVE通知</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/git.css') }}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/git.css') }}">
+{% endblock %}
+
+{% block title %}CVE通知{% endblock %}
+
+{% block main %}
 <button id="update-list" onclick="updateList()">更新列表</button>
 <div id="new-data-message" style="display: none; color: red; font-weight: bold;">新数据已添加</div>
 <div id="no-new-data-message" style="display: none; color: blue;">暂无最新数据</div>
@@ -20,7 +20,10 @@
     </li>
     {% endfor %}
 </ul>
-<script src="{{ url_for('static', filename='js/git.js') }}"></script>
+
+{% endblock %}
+
+{% block extra %}
 <script>
     function updateList() {
         fetch('/git/update').then(response => response.json()).then(data => {
@@ -45,6 +48,6 @@
             }
         });
     }
+
 </script>
-</body>
-</html>
+{% endblock %}

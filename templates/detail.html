@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-     <style>
+{% extends 'base.html' %}
+<title></title>
+{% block head %}
+       <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
@@ -44,22 +42,26 @@
             font-size: 12px;
         }
     </style>
-</head>
-<body>
+{% endblock %}
+
+{% block title %}详情{% endblock %}
+
+{% block main %}
 <h2>
     {{title}}
 </h2>
- {% for data in datas %}
-                <div class="index_link">
-                    <p class="entry">
-                      <a href="{{data.get('link')}}">{{ data.get('title') }}</a>
-                    </p>
-                    <p class="link_date">
-                        <span class="question-time">{{data.get('date') }}</span>
-                    </p>
+{% for data in datas %}
+<div class="index_link">
+    <p class="entry">
+        <a href="{{data.get('link')}}">{{ data.get('title') }}</a>
+    </p>
+    <p class="link_date">
+        <span class="question-time">{{data.get('date') }}</span>
+    </p>
+</div>
+{% endfor %}
 
-                </div>
-            </li>
-        {% endfor %}
-</body>
-</html>
+{% endblock %}
+
+{% block extra %}
+{% endblock %}

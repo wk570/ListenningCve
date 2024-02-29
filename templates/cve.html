@@ -1,26 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <!-- 引入 jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/git.css') }}">
     <!-- 引入 DataTables JS -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     <!-- 引入 DataTables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-    <title>Title</title>
+{% endblock %}
 
-</head>
-<body>
+{% block title %}NVD-CVE{% endblock %}
+
+{% block main %}
         <div class="form-container">
             <div class="form-group">
                 <label for="select_time">时间范围：</label>
                 <select id="select_time">
-                    <option value="7">最近七天</option>
-                    <option value="custom">自定义</option>
                     <option value="1">最近一天</option>
                     <option value="3">最近三天</option>
+                    <option value="7">最近七天</option>
                     <option value="30">一个月</option>
+                    <option value="custom">自定义</option>
                 </select>
             </div>
             <div class="form-group custom-time" style="display: none;">
@@ -53,8 +52,9 @@
             <tbody></tbody>
         </table>
 
+{% endblock %}
 
+{% block extra %}
         <script src="{{url_for('static', filename='js/cve.js')}}"></script> <!-- 这里根据实际情况保持引入位置 -->
 
-</body>
-</html>
+{% endblock %}
