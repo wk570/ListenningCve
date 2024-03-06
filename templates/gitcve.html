@@ -7,8 +7,8 @@
 
 {% block main %}
 <button id="update-list" onclick="updateList()">更新列表</button>
-<div id="new-data-message" style="display: none; color: red; font-weight: bold;">新数据已添加</div>
-<div id="no-new-data-message" style="display: none; color: blue;">暂无最新数据</div>
+<div id="new-data-message" style="display: none; color: blue;">新数据已添加</div>
+<div id="loading-message" style="display: none; color: red; font-weight: bold;">正在请求数据</div>
 <ul id="cve-list">
     {% for cve in existing_list %}
     <li>
@@ -26,13 +26,21 @@
 {% block extra %}
 <script>
     function updateList() {
-        fetch('/git/update').then(response => response.json()).then(data => {
-            const newDataMessage = document.getElementById('new-data-message');
-            const noNewDataMessage = document.getElementById('no-new-data-message');
 
-            if (data.length === 0) {
-                noNewDataMessage.style.display = 'block'; // 显示无最新数据提示
+    console.log("2");
+    document.getElementById('new-data-message').style.display = 'none';
+    document.getElementById('loading-message').style.display = 'block';
+        fetch('/git/update')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loading-message').style.display = 'none';
+          if (Object.keys(data).length === 0) {
+            alert('暂无最新数据');
+             }
+             else if (data.hasOwnProperty('error')) {
+                alert(data.error);
             } else {
+                const newDataMessage = document.getElementById('new-data-message');
                 newDataMessage.style.display = 'block'; // 显示新数据已添加提示
 
                 data.forEach(cve => {
@@ -46,7 +54,11 @@
                     document.getElementById('cve-list').prepend(newItem); // 将新数据添加到顶部
                 });
             }
-        });
+        })
+        .catch(error => {
+                    alert('An error occurred. Please try again later.');
+                    document.getElementById('loading-message').style.display = 'none';
+                });
     }
 
 </script>
