@@ -2,7 +2,7 @@ import datetime
 import re
 from lxml import etree
 import requests
-from flask import Blueprint, render_template,  jsonify
+from flask import Blueprint, render_template,  jsonify, current_app
 
 from exts import db
 from models import CveModel

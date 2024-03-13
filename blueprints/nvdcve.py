@@ -1,7 +1,7 @@
 import json
 
 import requests
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template, current_app, jsonify
 import config
 
 headers = {

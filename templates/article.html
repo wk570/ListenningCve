@@ -6,31 +6,35 @@
 {% block title %}最新文章{% endblock %}
 
 {% block main %}
-  <button class="myButton" id="myButton">更新</button>
-        <div class="loader" id="loader" style="display: none;"></div>
-        <div id="clickTime"></div>
-    <div class="list">
+<body>
+ <div class="update", id="update">
+        <h3> 今日更新 </h3>
+        <ul id="items">
 
-        {% for data in datas %}
-                <div class="main_title">
-                    <h2 class="rss_tile">{{data.get('rss_title')}} </h2>
-                    <p class="question-title"><a href="{{url_for('article.rss_detail', rss_id=data.rss_id)}}" target="_blank">查看更多</a></p>
-                    <div class="index_link">
-                        {% for entry in data.get('entries')%}
-                        <p class="entry">
-                          <a href="{{entry.get('link')}}"target="_blank">{{ entry.get('title') }}</a>
-                        </p>
-                        <p class="link_date">
-                            <span class="question-time">{{ entry.get('date') }}</span>
-                        </p>
-                        {% endfor %}
-                    </div>
-                </div>
-        {% endfor %}
+
+        </ul>
     </div>
+<div id="data-container" class="container">
+    <!-- 平台内容 -->
+    <div class="platform">
+        <h2 class="rss_tile">Platform Title</h2>
+        <div class="entries">
+            <!-- 条目 -->
+            <div class="entry">
+                <a href="#" class="entry-link">Entry Title</a>
+                <div class="link_date">Date</div>
+            </div>
+        </div>
+        <a href="#" class="view-more">View More</a>
+    </div>
+    <!-- 重复平台内容 -->
+    <!-- 重复平台内容 -->
+</div>
+
+
+
 
 {% endblock %}
-
 {% block extra %}
 
 <script src="{{url_for('static', filename='js/refresh_test.js')}}"></script>
